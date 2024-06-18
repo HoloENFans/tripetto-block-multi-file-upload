@@ -8,8 +8,7 @@
     "strict": true,
     "experimentalDecorators": true,
     "noEmit": true,
-    "noUnusedLocals": true,
-    "importHelpers": true
+    "noUnusedLocals": true
   },
   "include": ["./src/**/*.ts"]
 }

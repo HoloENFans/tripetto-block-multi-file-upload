@@ -49,6 +49,7 @@ export class MultiFileUpload extends NodeBlock {
                 type: Slots.String,
                 reference: `file-${i}`,
                 label: 'File',
+                exportable: true,
             });
         }
     }
@@ -68,6 +69,7 @@ export class MultiFileUpload extends NodeBlock {
                     new Forms.Numeric(Forms.Numeric.bind(this, 'maxFiles', 10, 10)),
                 ],
             },
+            activated: true,
         });
         this.editor.option({
             name: pgettext("block:file-upload", "File size"),

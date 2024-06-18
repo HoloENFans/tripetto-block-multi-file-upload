@@ -43,6 +43,10 @@ export abstract class MultiFileUpload extends NodeBlock<IMultiFileUpload> {
         );
     }
 
+    get limit() {
+        return this.props.limit && this.props.limit > 0 ? this.props.limit : 50;
+    }
+
     get allowedExtensions() {
         return filter(
             (this.props.extensions &&
@@ -75,11 +79,9 @@ export abstract class MultiFileUpload extends NodeBlock<IMultiFileUpload> {
     }
 
     private hasValidFileSize(file: File): boolean {
-        if (this.props.limit) {
-            const maximumFileBytes = this.props.limit * 1024 * 1024;
+        const maximumFileBytes = this.limit * 1024 * 1024;
 
-            return file.size <= maximumFileBytes;
-        }
+        return file.size <= maximumFileBytes;
 
         return true;
     }
