@@ -1,0 +1,14 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "newLine": "LF",
+    "strict": true,
+    "experimentalDecorators": true,
+    "noEmit": true,
+    "noUnusedLocals": true
+  },
+  "include": ["./src/**/*.ts"]
+}

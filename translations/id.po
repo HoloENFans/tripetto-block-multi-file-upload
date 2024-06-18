@@ -1,0 +1,53 @@
+# Tripetto File Upload Block
+# Copyright (C) 2021 Tripetto B.V.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: @tripetto/block-file-upload 3.1.0\n"
+"Report-Msgid-Bugs-To: support@tripetto.com\n"
+"POT-Creation-Date: 2021-04-07 08:44+0200\n"
+"PO-Revision-Date: 2021-04-07 08:44+0200\n"
+"Last-Translator: Hisam A Fahri\n"
+"Language-Team: \n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgctxt "block:file-upload"
+msgid "Allowed file types"
+msgstr "Tipe berkas yang diperbolehkan"
+
+msgctxt "block:file-upload"
+msgid "Comma separated list, e.g. .png, .jpg"
+msgstr "Daftar yang dipisahkan koma, misal .png, .jpg"
+
+msgctxt "block:file-upload"
+msgid "File size"
+msgstr "Ukuran berkas"
+
+msgctxt "block:file-upload"
+msgid "File type"
+msgstr "Jenis berkas"
+
+msgctxt "block:file-upload"
+msgid "File upload"
+msgstr "Unggah berkas"
+
+msgctxt "block:file-upload"
+msgid "File upload state"
+msgstr "Status pengunggahan berkas"
+
+msgctxt "block:file-upload"
+msgid "File uploaded"
+msgstr "Berkas diunggah"
+
+msgctxt "block:file-upload"
+msgid "Maximum file size"
+msgstr "Ukuran maksimal berkas"
+
+msgctxt "block:file-upload"
+msgid "No file uploaded"
+msgstr "Tidak ada berkas yang diunggah"

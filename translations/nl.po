@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: support@tripetto.com\n"
+"POT-Creation-Date: 2020-10-09 14:23+0200\n"
+"PO-Revision-Date: 2020-10-09 14:23+0200\n"
+"Last-Translator: Mark van den Brink <mark@vandenbr.ink>\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgctxt "block:file-upload"
+msgid "Allowed file types"
+msgstr "Toegestane bestandstypen"
+
+msgctxt "block:file-upload"
+msgid "Comma separated list, e.g. .png, .jpg"
+msgstr "Bestandsextensies met komma gescheiden (bijvoorbeeld .png, .jpg)"
+
+msgctxt "block:file-upload"
+msgid "File size"
+msgstr "Bestandsgrootte"
+
+msgctxt "block:file-upload"
+msgid "File type"
+msgstr "Bestandstype"
+
+msgctxt "block:file-upload"
+msgid "File upload"
+msgstr "Bestandsupload"
+
+msgctxt "block:file-upload"
+msgid "File upload state"
+msgstr "Status van bestand uploaden"
+
+msgctxt "block:file-upload"
+msgid "File uploaded"
+msgstr "Bestand geüpload"
+
+msgctxt "block:file-upload"
+msgid "Maximum file size"
+msgstr "Maximale bestandsgrootte"
+
+msgctxt "block:file-upload"
+msgid "No file uploaded"
+msgstr "Geen bestand geüpload"

@@ -1,0 +1,137 @@
+{
+  "name": "@holoenfans/tripetto-block-multi-file-upload",
+  "title": "Tripetto Multi File Upload Block",
+  "version": "0.0.1",
+  "description": "Multi file upload block for Tripetto.",
+  "keywords": [
+    "tripetto",
+    "tripetto block",
+    "form kit",
+    "form builder",
+    "form builder SDK",
+    "form",
+    "forms",
+    "survey",
+    "surveys",
+    "block"
+  ],
+  "license": "MIT",
+  "private": false,
+  "homepage": "https://github.com/HoloENFans/tripetto-block-multi-file-upload",
+  "author": {
+    "name": "GoldElysium",
+    "email": "gold@goldelysium.dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HoloENFans/tripetto-block-multi-file-upload.git"
+  },
+  "bugs": {
+    "url": "https://github.com/HoloENFans/tripetto-block-multi-file-upload/issues"
+  },
+  "main": "./builder/es5/index.js",
+  "browser": "./builder/es5/index.js",
+  "module": "./builder/esm/index.mjs",
+  "types": "./builder/index.d.ts",
+  "unpkg": "./builder/index.js",
+  "jsdelivr": "./builder/index.js",
+  "exports": {
+    ".": {
+      "import": "./builder/esm/index.mjs",
+      "require": "./builder/es5/index.js",
+      "umd": "./builder/index.js",
+      "types": "./builder/index.d.ts",
+      "default": "./builder/es5/index.js"
+    },
+    "./runner": {
+      "import": "./runner/esm/index.mjs",
+      "require": "./runner/es5/index.js",
+      "umd": "./runner/index.js",
+      "script": "./runner/index.js",
+      "types": "./runner/index.d.ts",
+      "default": "./runner/es5/index.js"
+    },
+    "./runner/es5": {
+      "types": "./runner/index.d.ts",
+      "default": "./runner/es5/index.js"
+    },
+    "./builder": {
+      "import": "./builder/esm/index.mjs",
+      "require": "./builder/es5/index.js",
+      "umd": "./builder/index.js",
+      "script": "./builder/index.js",
+      "types": "./builder/index.d.ts",
+      "default": "./builder/es5/index.js"
+    },
+    "./builder/es5": {
+      "types": "./builder/index.d.ts",
+      "default": "./builder/es5/index.js"
+    },
+    "./translations/*": "./translations/*.json",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "update": "npm-check -su",
+    "start": "npm test",
+    "format": "prettier --trailing-comma es5 --write \"src/**/*.ts\" \"tasks/**/*.js\" \"webpack.config.js\" \"*.json\" \"!package-lock.json\" \"*.yml\"",
+    "lint": "eslint ./src/**/*.ts",
+    "stats": "ts-stats",
+    "pot": "node ./tasks/l10n/sources.js && xgettext -f ./translations/sources --language=\"JavaScript\" --keyword=\"npgettext:1c,2,3\" --keyword=\"dnpgettext:2c,3,4\" --keyword=\"_n:1,2\" --from-code=\"UTF-8\" --no-wrap --sort-output --force-po --no-location --add-comments=\"TRANSLATOR: \" --output=\"./translations/template.pot\" && shx rm -rf ./translations/sources && node ./tasks/l10n/pot.js",
+    "test": "webpack --mode development && concurrently -n \"tripetto,webpack\" -c \"blue.bold,green\" -k -s \"first\" \"tripetto ./tests/example.json --verbose\" \"webpack --mode development --watch\"",
+    "make:clean": "shx rm -rf *.tgz ./builder/* ./runner/* ./reports/*",
+    "make:compile": "tsc",
+    "make:types": "tsc --declaration --noEmit false --emitDeclarationOnly --diagnostics --outDir ./ && prettier --ignore-path=.prettierignore --trailing-comma es5 --tab-width 4 --write \"builder/**/*.d.ts\" \"runner/**/*.d.ts\"",
+    "make:po2json": "shx rm -rf ./translations/*.json && node ./tasks/l10n/po2json.js",
+    "make:esm": "rollup -c --bundleConfigAsCjs",
+    "make:tests": "node ./tests/es5.spec.js && node ./tests/esm.spec.mjs",
+    "make": "npm run make:clean && npm run lint && npm run make:types && webpack --mode production && npm run make:esm && npm run make:tests && npm run stats",
+    "preversion": "npm run format && npm run lint && npm run make:compile && exit-on-dirty-git",
+    "postversion": "git push --follow-tags",
+    "prepack": "npm run make",
+    "prepublishOnly": "exit-on-dirty-git",
+    "publish:next": "git-branch-is next && git push --set-upstream origin next && npm version prerelease && npm publish --tag next",
+    "publish:patch": "git-branch-is main && npm version patch && npm publish",
+    "publish:minor": "git-branch-is main && npm version minor && npm publish",
+    "publish:major": "git-branch-is main && npm version major && npm publish"
+  },
+  "devDependencies": {
+    "@compodoc/ts-stats": "^1.1.1",
+    "@rollup/plugin-replace": "^5.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@tripetto/builder": "^6.0.6",
+    "@tripetto/runner": "^8.0.0",
+    "@types/node": "^20.8.4",
+    "@typescript-eslint/eslint-plugin": "^7.13.1",
+    "@typescript-eslint/parser": "^7.13.1",
+    "concurrently": "^8.2.1",
+    "eslint": "^8.51.0",
+    "exit-on-dirty-git": "^1.0.1",
+    "file-loader": "^6.2.0",
+    "git-branch-is": "^4.0.0",
+    "image-webpack-loader": "^8.1.0",
+    "npm-check": "^6.0.1",
+    "po2json": "^1.0.0-beta-3",
+    "prettier": "^3.0.3",
+    "rollup": "^4.18.0",
+    "rollup-plugin-visualizer": "^5.9.2",
+    "shx": "^0.3.4",
+    "terser-webpack-plugin": "^5.3.9",
+    "ts-loader": "^9.5.0",
+    "typescript": "^5.2.2",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.88.2",
+    "webpack-bundle-analyzer": "^4.9.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-livereload-plugin": "^3.0.2",
+    "webpack-shell-plugin-next": "^2.3.1"
+  },
+  "tripetto": {
+    "entry": "./builder/index.js",
+    "translations": "./translations/",
+    "blocks": [
+      "."
+    ],
+    "noFurtherLoading": true
+  }
+}
