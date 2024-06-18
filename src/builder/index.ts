@@ -40,17 +40,19 @@ export class MultiFileUpload extends NodeBlock {
 
     @slots
     defineSlots(): void {
-        for (let i = this.maxFiles; i < this.slots.count; i++) {
-            this.slots.delete(`file-${i}`);
-        }
-
-        for (let i = this.slots.count; i < this.maxFiles; i++) {
-            this.slots.static({
-                type: Slots.String,
-                reference: `file-${i}`,
-                label: "File",
-                exportable: true,
-            });
+        if (this.maxFiles > this.slots.count) {
+            for (let i = this.slots.count; i < this.maxFiles; i++) {
+                this.slots.static({
+                    type: Slots.String,
+                    reference: `file-${i}`,
+                    label: "File",
+                    exportable: true,
+                });
+            }
+        } else {
+            for (let i = this.maxFiles; i < this.slots.count; i++) {
+                this.slots.delete(`file-${i}`);
+            }
         }
     }
 

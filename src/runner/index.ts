@@ -169,7 +169,7 @@ export abstract class MultiFileUpload extends NodeBlock<IMultiFileUpload> {
 
                                     if (this.isImage(i)) {
                                         this.convertToBase64(file, (data) => {
-                                            this.cache = data;
+                                            this.cache[i] = data;
 
                                             resolve();
                                         });
