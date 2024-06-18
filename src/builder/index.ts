@@ -29,7 +29,7 @@ import ICON from "../../assets/icon.svg";
 })
 export class MultiFileUpload extends NodeBlock {
     @definition
-    @affects('#slots')
+    @affects("#slots")
     maxFiles!: number;
 
     @definition
@@ -48,7 +48,7 @@ export class MultiFileUpload extends NodeBlock {
             this.slots.static({
                 type: Slots.String,
                 reference: `file-${i}`,
-                label: 'File',
+                label: "File",
                 exportable: true,
             });
         }
@@ -62,11 +62,13 @@ export class MultiFileUpload extends NodeBlock {
 
         this.editor.groups.settings();
         this.editor.option({
-            name: 'File count',
+            name: "File count",
             form: {
-                title: 'Maximum file count',
+                title: "Maximum file count",
                 controls: [
-                    new Forms.Numeric(Forms.Numeric.bind(this, 'maxFiles', 10, 10)),
+                    new Forms.Numeric(
+                        Forms.Numeric.bind(this, "maxFiles", 10, 10)
+                    ),
                 ],
             },
             activated: true,

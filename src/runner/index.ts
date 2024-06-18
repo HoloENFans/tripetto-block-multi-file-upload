@@ -29,7 +29,11 @@ export abstract class MultiFileUpload extends NodeBlock<IMultiFileUpload> {
     private cache: { [key: number]: string | undefined } = {};
 
     isUploading(i: number) {
-        return (i > 0 && i < this.props.maxFiles) && this.valueOf<string>(`file-${i}`)!.isAwaiting;
+        return (
+            i > 0 &&
+            i < this.props.maxFiles &&
+            this.valueOf<string>(`file-${i}`)!.isAwaiting
+        );
     }
 
     isImage(i: number) {
@@ -37,10 +41,7 @@ export abstract class MultiFileUpload extends NodeBlock<IMultiFileUpload> {
 
         const slot = this.valueOf<string>(`file-${i}`)!;
 
-        return (
-            slot.hasValue &&
-            this.hasImageExtension(slot.value)
-        );
+        return slot.hasValue && this.hasImageExtension(slot.value);
     }
 
     get limit() {
@@ -121,71 +122,77 @@ export abstract class MultiFileUpload extends NodeBlock<IMultiFileUpload> {
         service?: IFileUploadService,
         onProgress?: (percent: number) => void
     ): Promise<void> {
-        const slots = Array.from({ length: this.props.maxFiles }, (_, i) => this.valueOf<string>(`file-${i}`)!);
+        const slots = Array.from(
+            { length: this.props.maxFiles },
+            (_, i) => this.valueOf<string>(`file-${i}`)!
+        );
         const availableSlots = slots.filter((slot) => !slot.hasValue);
 
-        if (files.length > availableSlots.length) return Promise.reject("invalid-amount");
+        if (files.length > availableSlots.length)
+            return Promise.reject("invalid-amount");
 
-        await Promise.all(Array.from({ length: files.length }, (_, i) => {
-            return new Promise<void>(
-                (
-                    resolve: () => void,
-                    reject: (
-                        error:
-                            | "invalid-amount"
-                            | "invalid-extension"
-                            | "invalid-size"
-                            | string
-                    ) => void
-                ) => {
-                    const file = files[i];
+        await Promise.all(
+            Array.from({ length: files.length }, (_, i) => {
+                return new Promise<void>(
+                    (
+                        resolve: () => void,
+                        reject: (
+                            error:
+                                | "invalid-amount"
+                                | "invalid-extension"
+                                | "invalid-size"
+                                | string
+                        ) => void
+                    ) => {
+                        const file = files[i];
 
-                    if (!this.hasValidFileExtension(file)) {
-                        return reject("invalid-extension");
-                    }
+                        if (!this.hasValidFileExtension(file)) {
+                            return reject("invalid-extension");
+                        }
 
-                    if (!this.hasValidFileSize(file)) {
-                        return reject("invalid-size");
-                    }
+                        if (!this.hasValidFileSize(file)) {
+                            return reject("invalid-size");
+                        }
 
-                    const slot = availableSlots[i];
-                    slot.await();
+                        const slot = availableSlots[i];
+                        slot.await();
 
-                    if (service) {
-                        service
-                            .put(file, onProgress)
-                            .then((id) => {
-                                slot.set(file.name, id);
+                        if (service) {
+                            service
+                                .put(file, onProgress)
+                                .then((id) => {
+                                    slot.set(file.name, id);
 
-                                if (this.isImage(i)) {
-                                    this.convertToBase64(file, (data) => {
-                                        this.cache = data;
+                                    if (this.isImage(i)) {
+                                        this.convertToBase64(file, (data) => {
+                                            this.cache = data;
 
+                                            resolve();
+                                        });
+                                    } else {
                                         resolve();
-                                    });
-                                } else {
+                                    }
+                                })
+                                .catch((error) => {
+                                    slot.clear();
+
+                                    reject(error);
+                                });
+                        } else {
+                            this.convertToBase64(
+                                file,
+                                (data) => {
+                                    slot.set(file.name, data);
+
                                     resolve();
-                                }
-                            })
-                            .catch((error) => {
-                                slot.clear();
-
-                                reject(error);
-                            });
-                    } else {
-                        this.convertToBase64(
-                            file,
-                            (data) => {
-                                slot.set(file.name, data);
-
-                                resolve();
-                            },
-                            onProgress
-                        );
+                                },
+                                onProgress
+                            );
+                        }
                     }
-                }
-            );
-        }));
+                );
+            })
+        );
     }
 
     download(i: number, service?: IFileUploadService): Promise<string> {

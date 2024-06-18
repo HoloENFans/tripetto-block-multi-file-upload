@@ -1,7 +1,7 @@
 {
   "name": "@holoenfans/tripetto-block-multi-file-upload",
   "title": "Tripetto Multi File Upload Block",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Multi file upload block for Tripetto.",
   "keywords": [
     "tripetto",
@@ -73,7 +73,7 @@
   "scripts": {
     "update": "npm-check -su",
     "start": "npm test",
-    "format": "prettier --trailing-comma es5 --write \"src/**/*.ts\" \"tasks/**/*.js\" \"webpack.config.js\" \"*.json\" \"!package-lock.json\" \"*.yml\"",
+    "format": "prettier --trailing-comma es5 --write \"src/**/*.ts\" \"tasks/**/*.js\" \"webpack.config.js\" \"*.json\" \"!package-lock.json\"",
     "lint": "eslint ./src/**/*.ts",
     "stats": "ts-stats",
     "pot": "node ./tasks/l10n/sources.js && xgettext -f ./translations/sources --language=\"JavaScript\" --keyword=\"npgettext:1c,2,3\" --keyword=\"dnpgettext:2c,3,4\" --keyword=\"_n:1,2\" --from-code=\"UTF-8\" --no-wrap --sort-output --force-po --no-location --add-comments=\"TRANSLATOR: \" --output=\"./translations/template.pot\" && shx rm -rf ./translations/sources && node ./tasks/l10n/pot.js",
