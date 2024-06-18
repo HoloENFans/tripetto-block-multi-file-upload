@@ -44,6 +44,10 @@ export abstract class MultiFileUpload extends NodeBlock<IMultiFileUpload> {
         return slot.hasValue && this.hasImageExtension(slot.value);
     }
 
+    get maxFiles() {
+        return this.props.maxFiles;
+    }
+
     get limit() {
         return this.props.limit && this.props.limit > 0 ? this.props.limit : 50;
     }

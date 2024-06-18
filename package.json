@@ -1,7 +1,7 @@
 {
   "name": "@holoenfans/tripetto-block-multi-file-upload",
   "title": "Tripetto Multi File Upload Block",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Multi file upload block for Tripetto.",
   "keywords": [
     "tripetto",
